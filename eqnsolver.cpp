@@ -1,4 +1,6 @@
 // code to solve the equation x*(x+1) = n for x given n .
+
+
 ll n , x;
 cin >> n;
 
@@ -23,6 +25,6 @@ while (r - l > 1)
         r = x;
     }
 }
-// At this point
+// At this point in the code
 // if the root of the equation is integer then l==r==root
 // else the root lies within (l,r) where r == l+1 
