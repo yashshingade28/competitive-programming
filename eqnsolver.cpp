@@ -8,7 +8,6 @@ ll l = 1, r = 1e9;
 while (r - l > 1)
 {
     x = (l + r) / 2;
-    cerr << l << " " << r << endl;
     if (x * (x + 1) == n)
     {
         l = x;
@@ -24,5 +23,6 @@ while (r - l > 1)
         r = x;
     }
 }
+// At this point
 // if the root of the equation is integer then l==r==root
 // else the root lies within (l,r) where r == l+1 
