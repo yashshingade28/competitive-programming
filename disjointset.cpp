@@ -10,13 +10,13 @@ public:
         sz.assign(n, 1);
     }
 
-    int root(int x) {
-        return (x == p[x] ? x : (p[x] = root(p[x])));
+    int find(int x) {
+        return (x == p[x] ? x : (p[x] = find(p[x])));
     }
 
     bool merge(int x, int y) {
-        x = root(x);
-        y = root(y);
+        x = find(x);
+        y = find(y);
         if (x != y) {
             if (sz[x] < sz[y])
                 swap(x, y);
