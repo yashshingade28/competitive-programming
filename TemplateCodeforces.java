@@ -14,7 +14,7 @@ import java.util.*;
 import java.io.*;
 import java.math.*;
 
-public class magentacobra_t
+public class TemplateCodeforces
 {
     public static void main(String hi[]) throws Exception
     {
