@@ -1,13 +1,10 @@
 class dsu {
 public:
     int n;
-    vector<int> p;
-    vector<int> sz;
+    vector<int> p , sz ;
 
-    dsu(int k) : n(k) {
-        p.resize(n);
+    dsu(int k) : p(n), sz(n, 1), n(k) {
         iota(p.begin(), p.end(), 0);
-        sz.assign(n, 1);
     }
 
     int find(int x) {
