@@ -1,27 +1,35 @@
-template<int MOD>
+template<typename T, T MOD>
 class ModInt {
 public:
-  int32_t x;
-  ModInt(int64_t sig = 0) : x(sig % MOD) { if (x < 0) x += (MOD < 0) ? -MOD : MOD; }
-  explicit operator int() const { return x; }
-  ModInt pow(int64_t p) { ModInt res = 1, a = *this; while (p) { if (p & 1) res *= a; a *= a; p >>= 1; } return res; }
+    T x;
+    ModInt(int64_t sig = 0) : x(sig % MOD) { if (x < 0) x += (MOD < 0) ? -MOD : MOD; }
+    template <typename U> operator U() const { return static_cast<U>(x); }
+    ModInt pow(int64_t p) const { ModInt res = 1, a = *this; while (p) { if (p & 1) res *= a; a *= a; p >>= 1; } return res; }
 
-  ModInt &operator+=(const ModInt& that) { if ((x += that.x) >= MOD) x -= MOD; return *this; }
-  ModInt &operator-=(const ModInt& that) { if ((x += MOD - that.x) >= MOD) x -= MOD; return *this; }
-  ModInt &operator*=(const ModInt& that) { x = (uint64_t)x * that.x % MOD; return *this; }
-  ModInt &operator/=(const ModInt& that) { assert(that.x != 0); return (*this) *= that.pow(MOD - 2); }
+    ModInt& operator+=(const ModInt& rhs) { if ((x += rhs.x) >= MOD) x -= MOD; return *this; }
+    ModInt& operator-=(const ModInt& rhs) { if ((x += MOD - rhs.x) >= MOD) x -= MOD; return *this; }
+    ModInt& operator*=(const ModInt& rhs) { x = ((uint64_t)x * rhs.x) % MOD; return *this; }
+    ModInt& operator/=(const ModInt& rhs) { assert(rhs.x != 0); return (*this) *= rhs.pow(MOD - 2); }
 
-  ModInt operator+(const ModInt& that) const { return ModInt(*this) += that; }
-  ModInt operator-(const ModInt& that) const { return ModInt(*this) -= that; }
-  ModInt operator*(const ModInt& that) const { return ModInt(*this) *= that; }
-  ModInt operator/(const ModInt& that) const { return ModInt(*this) /= that; }
+    friend ModInt operator+(const ModInt& a, const ModInt& b) { return ModInt(a) += b; }
+    friend ModInt operator-(const ModInt& a, const ModInt& b) { return ModInt(a) -= b; }
+    friend ModInt operator*(const ModInt& a, const ModInt& b) { return ModInt(a) *= b; }
+    friend ModInt operator/(const ModInt& a, const ModInt& b) { return ModInt(a) /= b; }
 
-  ModInt operator-() const { return ModInt(-x); }
-  ModInt& operator++() { return *this += 1; }
-  ModInt& operator--() { return *this -= 1; }
-  bool operator==(const ModInt& o) const { return x == o.x; }
-  friend bool operator!=(const ModInt& a, const ModInt& b) { return !(a == b); }
+    ModInt operator-() const { return ModInt(-x); }
+    ModInt& operator++() { return *this += 1; }
+    ModInt& operator--() { return *this -= 1; }
+    ModInt operator++(int32_t) { ModInt res(*this); *this += 1; return res; }
+    ModInt operator--(int32_t) { ModInt res(*this); *this -= 1; return res; }
 
-  friend std::ostream& operator<<(std::ostream &os, const ModInt& a) { os << a.x; return os; }
+    friend bool operator==(const ModInt& a, const ModInt& b) { return a.x == b.x; }
+    friend bool operator!=(const ModInt& a, const ModInt& b) { return a.x != b.x; }
+    friend bool operator<(const ModInt& a, const ModInt& b) { return a.x < b.x; }
+    friend bool operator<=(const ModInt& a, const ModInt& b) { return a.x <= b.x; }
+    friend bool operator>(const ModInt& a, const ModInt& b) { return a.x > b.x; }
+    friend bool operator>=(const ModInt& a, const ModInt& b) { return a.x >= b.x; }
+
+    friend std::ostream& operator<<(std::ostream& os, const ModInt& a) { os << a.x; return os; }
+    friend std::istream& operator>>(std::istream& is, ModInt& a) { is >> a.x; return is; }
 };
-using mint = ModInt<998244353> ;
+using mint = ModInt<int32_t, 998244353> ;
