@@ -1,4 +1,4 @@
-template<typename T, T MOD>
+template <typename T, T MOD>
 class ModInt {
 public:
     T x;
@@ -19,8 +19,8 @@ public:
     ModInt operator-() const { return ModInt(-x); }
     ModInt& operator++() { return *this += 1; }
     ModInt& operator--() { return *this -= 1; }
-    ModInt operator++(int32_t) { ModInt res(*this); *this += 1; return res; }
-    ModInt operator--(int32_t) { ModInt res(*this); *this -= 1; return res; }
+    ModInt operator++(int) { ModInt res(*this); *this += 1; return res; }
+    ModInt operator--(int) { ModInt res(*this); *this -= 1; return res; }
 
     friend bool operator==(const ModInt& a, const ModInt& b) { return a.x == b.x; }
     friend bool operator!=(const ModInt& a, const ModInt& b) { return a.x != b.x; }
