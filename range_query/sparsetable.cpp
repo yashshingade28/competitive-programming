@@ -1,6 +1,6 @@
 template <typename T, class F = function<T(const T&, const T&)>>
 class SparseTable {
-public:
+   public:
     int n;
     vector<vector<T>> mat;
     F func;
