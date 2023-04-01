@@ -1,6 +1,6 @@
 template <typename T>
 class fenwick {
-public:
+   public:
     int n;
     vector<T> fen;
     fenwick(int _n) : n(_n) {
