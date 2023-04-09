@@ -4,7 +4,7 @@ class ModInt {
     T x;
     ModInt(int64_t sig = 0) : x(sig % MOD) { if (x < 0) x += (MOD < 0) ? -MOD : MOD; }
     template <typename U> operator U() const { return static_cast<U>(x); }
-    friend ModInt pow(ModInt a, T b) { ModInt res = 1; while (b) { if (b & 1) res *= a; a *= a; b >>= 1; } return res; }
+    friend ModInt pow(ModInt a, int64_t b) { ModInt res = 1; while (b) { if (b & 1) res *= a; a *= a; b >>= 1; } return res; }
 
     ModInt& operator+=(const ModInt& rhs) { if ((x += rhs.x) >= MOD) x -= MOD; return *this; }
     ModInt& operator-=(const ModInt& rhs) { if ((x += MOD - rhs.x) >= MOD) x -= MOD; return *this; }
